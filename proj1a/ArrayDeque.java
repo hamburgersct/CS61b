@@ -1,4 +1,3 @@
-
 public class ArrayDeque<T> {
 
     private T[] items;
@@ -93,6 +92,23 @@ public class ArrayDeque<T> {
         int partLen = items.length - head;
         System.arraycopy(this.items, head, newArray, 0, partLen);
         System.arraycopy(this.items, 0, newArray, partLen, this.size - partLen);
+        items = newArray;
+        nextFirst = minusOneHelper(0);
+        nextLast = size;
+    }
+
+    public void resizeReduce(){
+        T[] newArray = (T[]) new Object[size / 2];
+        int head = plusOneHelper(nextFirst);
+        int rear = minusOneHelper(nextLast);
+        if (rear < head){
+            int partLen = items.length - head;
+            System.arraycopy(items, head, newArray, 0, partLen);
+            System.arraycopy(items, 0, newArray, partLen, this.size - partLen);
+        }
+        else {
+            System.arraycopy(items, 0, newArray, 0, size);
+        }
         items = newArray;
         nextFirst = minusOneHelper(0);
         nextLast = size;
