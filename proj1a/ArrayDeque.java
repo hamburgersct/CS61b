@@ -77,12 +77,18 @@ public class ArrayDeque<T> {
         size -= 1;
     }
 
+    /** usage ratio: size / items.length
+     *  if usage ratio < 0.25, the array should be resized
+     */
     public void removeLast(){
         if (isEmpty())
             throw new IndexOutOfBoundsException();
         nextLast = minusOneHelper(nextLast);
         items[nextLast] = null;
         size -= 1;
+        if (size / items.length < 0.25 && size > 0){
+            resizeReduce();
+        }
     }
 
     public void resizeExpand(){
