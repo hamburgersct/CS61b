@@ -125,12 +125,4 @@ public class ArrayDeque<T> {
         nextLast = size;
     }
 
-
-    public static void main(String[] args) {
-        ArrayDeque<Integer> deq = new ArrayDeque(5, 1, 2);
-        deq.addFirst(1);
-        deq.addFirst(2);
-        deq.removeLast();
-//        deq.removeLast();
-    }
 }
