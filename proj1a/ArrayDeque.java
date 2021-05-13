@@ -68,6 +68,10 @@ public class ArrayDeque<T> {
         size += 1;
     }
 
+    /** usage ratio: size / items.length
+     *  if usage ratio < 0.25, the array should be resized
+     */
+
     public void removeFirst(){
         if (isEmpty()){
             throw new IndexOutOfBoundsException();
@@ -75,11 +79,12 @@ public class ArrayDeque<T> {
         nextFirst = plusOneHelper(nextFirst);
         items[nextFirst] = null;
         size -= 1;
+        if (size / items.length < 0.25 && size > 0){
+            resizeReduce();
+        }
     }
 
-    /** usage ratio: size / items.length
-     *  if usage ratio < 0.25, the array should be resized
-     */
+
     public void removeLast(){
         if (isEmpty())
             throw new IndexOutOfBoundsException();
@@ -104,7 +109,7 @@ public class ArrayDeque<T> {
     }
 
     public void resizeReduce(){
-        T[] newArray = (T[]) new Object[size / 2];
+        T[] newArray = (T[]) new Object[items.length / 2];
         int head = plusOneHelper(nextFirst);
         int rear = minusOneHelper(nextLast);
         if (rear < head){
@@ -122,12 +127,10 @@ public class ArrayDeque<T> {
 
 
     public static void main(String[] args) {
-        ArrayDeque<Integer> deq = new ArrayDeque(4, 1, 2);
+        ArrayDeque<Integer> deq = new ArrayDeque(5, 1, 2);
         deq.addFirst(1);
-        deq.addLast(3);
-        deq.addFirst(5);
-        deq.addFirst(6);
-        deq.addLast(8);
+        deq.addFirst(2);
+        deq.removeLast();
 //        deq.removeLast();
     }
 }
