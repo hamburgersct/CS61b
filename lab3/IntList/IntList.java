@@ -5,17 +5,17 @@ import java.util.Formatter;
  * with a large number of additional methods.
  *
  * @author P. N. Hilfinger, with some modifications by Josh Hug and melaniecebula
- *         [Do not modify this file.]
+ * [Do not modify this file.]
  */
 public class IntList {
     /**
      * First element of list.
      */
-    public int first;
+    private int first;
     /**
      * Remaining elements of list.
      */
-    public IntList rest;
+    private IntList rest;
 
     /**
      * A List with first FIRST0 and rest REST0.
@@ -81,13 +81,13 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        if (A == null)
+        if (A == null) {
             return B;
-        else{
+        } else {
             IntList ptr = A;
-            while (ptr.rest != null)
+            while (ptr.rest != null) {
                 ptr = ptr.rest;
+            }
             ptr.rest = B;
         }
         return A;
@@ -98,33 +98,30 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        //TODO:  fill in method
         IntList newList;
         if (A == null) {
             if (B == null) {
                 return null;
-            }
-            else {
+            } else {
                 newList = new IntList(B.first, null);
                 IntList ptr = newList;
                 B = B.rest;
-                while (B != null){
+                while (B != null) {
                     ptr.rest = new IntList(B.first, null);
                     B = B.rest;
                     ptr = ptr.rest;
                 }
             }
-        }
-        else{
+        } else {
             newList = new IntList(A.first, null);
             IntList ptr = newList;
             A = A.rest;
-            while (A != null){
+            while (A != null) {
                 ptr.rest = new IntList(A.first, null);
                 ptr = ptr.rest;
                 A = A.rest;
             }
-            while (B != null){
+            while (B != null) {
                 ptr.rest = new IntList(B.first, null);
                 B = B.rest;
                 ptr = ptr.rest;
@@ -132,20 +129,6 @@ public class IntList {
         }
         return newList;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /**
@@ -270,26 +253,25 @@ public class IntList {
         return out.toString();
     }
 
-    public static IntList reverse(IntList A){
-        if (A == null)
+    public static IntList reverse(IntList A) {
+        if (A == null) {
             return null;
-        IntList Re, T;
-        for (Re = null; A != null; A = T){
-            T = A.rest;
-            A.rest = Re;
-            Re = A;
         }
-    return Re;
+        IntList re, T;
+        for (re = null; A != null; A = T) {
+            T = A.rest;
+            A.rest = re;
+            re = A;
+        }
+        return re;
     }
 
-    public static IntList ndes_reverse(IntList A){
+    public static IntList ndesReverse(IntList A) {
         IntList newList = null;
-        while (A != null){
+        while (A != null) {
             newList = new IntList(A.first, newList);
             A = A.rest;
         }
         return newList;
     }
-
-
 }
